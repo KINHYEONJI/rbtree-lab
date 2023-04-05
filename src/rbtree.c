@@ -242,8 +242,15 @@ int rbtree_erase(rbtree *t, node_t *p)
   return 0;
 }
 
+void inorder(node_t *root, node_t *nil, key_t *arr, int *index)
+{
+}
+
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n)
 {
   // TODO: implement to_array
+  int *index = (int *)calloc(1, sizeof(int)); // 배열의 인덱스를 가리키는 포인터
+  inorder(t->root, t->nil, arr, index);       // 중위 순회를 하면서 값을 배열에 저장
+  free(index);
   return 0;
 }
