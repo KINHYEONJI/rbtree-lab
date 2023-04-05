@@ -6,6 +6,15 @@ rbtree *new_rbtree(void)
 {
   rbtree *p = (rbtree *)calloc(1, sizeof(rbtree));
   // TODO: initialize struct if needed
+
+  node_t *nil_node = (node_t *)calloc(1, sizeof(node_t)); // sentinel 노드 생성
+
+  nil_node->color = RBTREE_BLACK;
+  nil_node->key = 0;
+  nil_node->parent = nil_node->left = nil_node->right = p->nil;
+
+  p->nil = nil_node;
+  p->root = p->nil;
   return p;
 }
 
