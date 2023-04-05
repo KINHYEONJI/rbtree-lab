@@ -93,6 +93,58 @@ void right_rotate(rbtree *t, node_t *x)
   x->parent = y;
 }
 
+void rbtree_insert_fixup(rbtree *t, node_t *z) // 확인할 것 1. 부모와 삼촌의 색깔이 동일한가 2. 부모와 조부모와 내가 일직선상에 있는가
+{
+  while (z->parent->color == RBTREE_RED) // 조건 4를 만족하면 반복문 종료 (애초에 삽입된 노드의 부모가 black이라면 fix up 수행할 필요 없음)
+  {
+    if (z->parent == z->parent->parent->left) // 삼촌 찾는 조건문
+    {
+      node_t *y = z->parent->parent->right; // 삼촌을 가르키는 포인터 선언
+      if (y->color == RBTREE_RED)           // 자신의 부모와 삼촌이 모두 red일 경우 (red를 모아서 조부모에게 전달 한다는 느낌)
+      {
+        z->parent->color = RBTREE_BLACK;
+        y->color = RBTREE_BLACK;
+        z->parent->parent->color = RBTREE_RED; // 조부모 이하의 트리는 rbtree 속성을 모두 만족 시킨 상황
+        z = z->parent->parent;                 // 조부모를 z로 선언하여 반복문 처음으로 돌아감.
+      }
+      else // 자신의 부모는 red이고 삼촌은 black일 경우
+      {
+        if (z == z->parent->right) // 자신과 부모와 조부모가 일직선 상에 없는 경우 (왼쪽 회전 후 오른쪽 회전)
+        {
+          z = z->parent;
+          left_rotate(t, z);
+        }
+        z->parent->color = RBTREE_BLACK;
+        z->parent->parent->color = RBTREE_RED;
+        right_rotate(t, z->parent->parent);
+      }
+    }
+    else // left와 right를 바꿈 (거울모드 느낌)
+    {
+      node_t *y = z->parent->parent->left;
+      if (y->color == RBTREE_RED)
+      {
+        z->parent->color = RBTREE_BLACK;
+        y->color = RBTREE_BLACK;
+        z->parent->parent->color = RBTREE_RED;
+        z = z->parent->parent;
+      }
+      else
+      {
+        if (z == z->parent->left)
+        {
+          z = z->parent;
+          right_rotate(t, z);
+        }
+        z->parent->color = RBTREE_BLACK;
+        z->parent->parent->color = RBTREE_RED;
+        left_rotate(t, z->parent->parent);
+      }
+    }
+  }
+  t->root->color = RBTREE_BLACK;
+}
+
 node_t *rbtree_insert(rbtree *t, const key_t key)
 {
   // TODO: implement insert
