@@ -18,9 +18,15 @@ rbtree *new_rbtree(void)
   return p;
 }
 
+void delete_rbtree_node(node_t *node, node_t *nil)
+{
+}
+
 void delete_rbtree(rbtree *t)
 {
   // TODO: reclaim the tree nodes's memory
+  delete_rbtree_node(t->root, t->nil); // dfs로 자식 노드들을 재귀적으로 먼저 해제해 메모리 누수를 막음.
+  free(t->nil);
   free(t);
 }
 
