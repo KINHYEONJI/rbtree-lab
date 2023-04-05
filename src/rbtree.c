@@ -264,6 +264,77 @@ node_t *rbtree_minimum(rbtree *t, node_t *x) // 주어진 node x의 오른쪽 �
 
 void rbtree_erase_fixup(rbtree *t, node_t *x)
 {
+  while (x != t->root && x->color == RBTREE_BLACK)
+  {
+    node_t *w;
+    if (x == x->parent->left)
+    {
+      w = x->parent->right;
+
+      if (w->color == RBTREE_RED) // 형제 노드의 색깔이 red일 때
+      {
+        w->color = RBTREE_BLACK;
+        x->parent->color = RBTREE_RED;
+        left_rotate(t, x->parent);
+        w = x->parent->right;
+      }
+
+      if (w->left->color == RBTREE_BLACK && w->right->color == RBTREE_BLACK) // 형제 노드의 색깔과 형제의 자식 노드들 색깔이 모두 black일 때
+      {
+        w->color = RBTREE_RED;
+        x = x->parent;
+      }
+      else
+      {
+        if (w->right->color == RBTREE_BLACK) // 형제 노드의 색깔이 black이고, 왼쪽 자식은 red, 오른쪽 자식은 black일 때
+        {
+          w->left->color = RBTREE_BLACK;
+          w->color = RBTREE_RED;
+          right_rotate(t, w);
+          w = x->parent->right;
+        }
+        w->color = x->parent->color; // 형제 노드의 색깔이 black이고, 오른쪽 자식이 red일 때
+        x->parent->color = RBTREE_BLACK;
+        w->right->color = RBTREE_BLACK;
+        left_rotate(t, x->parent);
+        x = t->root;
+      }
+    }
+    else
+    {
+      w = x->parent->left;
+
+      if (w->color == RBTREE_RED)
+      {
+        w->color = RBTREE_BLACK;
+        x->parent->color = RBTREE_RED;
+        right_rotate(t, x->parent);
+        w = x->parent->left;
+      }
+
+      if (w->right->color == RBTREE_BLACK && w->left->color == RBTREE_BLACK)
+      {
+        w->color = RBTREE_RED;
+        x = x->parent;
+      }
+      else
+      {
+        if (w->left->color == RBTREE_BLACK)
+        {
+          w->right->color = RBTREE_BLACK;
+          w->color = RBTREE_RED;
+          left_rotate(t, w);
+          w = x->parent->left;
+        }
+        w->color = x->parent->color;
+        x->parent->color = RBTREE_BLACK;
+        w->left->color = RBTREE_BLACK;
+        right_rotate(t, x->parent);
+        x = t->root;
+      }
+    }
+  }
+  x->color = RBTREE_BLACK;
 }
 
 // 삭제하려는 노드의 유효한 (nil 노드가 아닌) 자식의 개수가 1개 이하인지 2개인지 판별
