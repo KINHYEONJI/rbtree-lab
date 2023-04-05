@@ -283,6 +283,23 @@ int rbtree_erase(rbtree *t, node_t *p)
   }
   else // 삭제하려는 노드의 자식이 두 개 일 때,
   {
+    y = rbtree_minimum(t, p->right); // successor 설정
+    y_origin_color = y->color;       // successor의 색깔 저장
+    x = y->right;
+    if (y->parent == p) // successor가 바로 p의 자식일 경우
+    {
+      x->parent = y;
+    }
+    else // successor가 p의 자손일 경우
+    {
+      rbtree_transplant(t, y, y->right); // y를 p자리 이동하기 위해 y자리를 y의 자식으로 바꿔줌
+      y->right = p->right;               // y의 left는 nil 이므로 처리해 줄 과정이 없음
+      y->right->parent = y;
+    }
+    rbtree_transplant(t, p, y); // p와 y의 자리를 바꿔줌
+    y->left = p->left;
+    y->left->parent = y;
+    y->color = p->color;
   }
 }
 
