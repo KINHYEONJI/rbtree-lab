@@ -20,6 +20,19 @@ rbtree *new_rbtree(void)
 
 void delete_rbtree_node(node_t *node, node_t *nil)
 {
+  if (node == nil)
+  {
+    return;
+  }
+  if (node->left != nil)
+  {
+    delete_rbtree_node(node->left, nil);
+  }
+  if (node->right != nil)
+  {
+    delete_rbtree_node(node->right, nil);
+  }
+  free(node);
 }
 
 void delete_rbtree(rbtree *t)
