@@ -262,6 +262,10 @@ node_t *rbtree_minimum(rbtree *t, node_t *x) // 주어진 node x의 오른쪽 �
   return x;
 }
 
+void rbtree_erase_fixup(rbtree *t, node_t *x)
+{
+}
+
 // 삭제하려는 노드의 유효한 (nil 노드가 아닌) 자식의 개수가 1개 이하인지 2개인지 판별
 // 한 개 이하 라면 그 하나의 자식으로 transplant
 // 두 개 라면 successor를 찾아서 그 값으로 transplant
@@ -301,6 +305,12 @@ int rbtree_erase(rbtree *t, node_t *p)
     y->left->parent = y;
     y->color = p->color;
   }
+
+  if (y_origin_color == RBTREE_BLACK) // 원래 색깔이 red 였다면 삭제해도 문제가 되지 않음
+  {
+    rbtree_erase_fixup(t, x);
+  }
+  return 0;
 }
 
 void inorder(node_t *root, node_t *nil, key_t *arr, int *index) // 크기순으로 배열에 담기 위한 중위순회 재귀함수
