@@ -96,6 +96,44 @@ void right_rotate(rbtree *t, node_t *x)
 node_t *rbtree_insert(rbtree *t, const key_t key)
 {
   // TODO: implement insert
+  node_t *z = (node_t *)calloc(1, sizeof(node_t)); // 삽입할 새로운 노드를 메모리에 할당
+  z->key = key;
+
+  node_t *x = t->root; // 새로운 노드가 들어갈 위치를 찾는 포인터
+  node_t *y = t->nil;
+
+  while (x != t->nil) // 새로운 노드 z의 부모를 찾으면 반복문 탈출
+  {
+    y = x;
+    if (z->key < x->key) // 주어진 노드보다 작으면 왼쪽으로 x 포인터 이동
+    {
+      x = x->left;
+    }
+    else
+    {
+      x = x->right; // 주어진 노드보다 크면 오른쪽으로 x 포인터 이동
+    }
+  }
+  z->parent = y;
+
+  if (y == t->nil) // 최초의 노드 삽입의 경우
+  {
+    t->root = z;
+  }
+  else if (z->key < y->key) // 부모보다 값이 작으면 왼쪽에 삽입
+  {
+    y->left = z;
+  }
+  else // 부모보다 값이 크면 오른쪽에 삽입
+  {
+    y->right = z;
+  }
+  z->left = t->nil; // 새로 말단에 삽입된 노드의 left, right는 nil노드여야 함
+  z->right = t->nil;
+  z->color = RBTREE_RED; // 삽입하는 노드의 색깔은 무조건 red
+
+  rbtree_insert_fixup(t, z); // 삽입 후 만족하지 않는 rbtree 특성을 맞춰주는 함수
+
   return t->root;
 }
 
