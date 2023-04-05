@@ -236,10 +236,32 @@ node_t *rbtree_max(const rbtree *t)
   return x;
 }
 
+void rbtree_transplant(rbtree *t, node_t *u, node_t *v) // 후임자(successor)를 삭제한 노드 자리에 넣어주는 함수
+{
+}
+
+// 삭제하려는 노드의 유효한 (nil 노드가 아닌) 자식의 개수가 1개 이하인지 2개인지 판별
+// 한 개 이하 라면 그 하나의 자식으로 transplant
+// 두 개 라면 successor를 찾아서 그 값으로 transplant
 int rbtree_erase(rbtree *t, node_t *p)
 {
-  // TODO: implement erase
-  return 0;
+  node_t *y = p;
+  node_t *x;
+  color_t y_origin_color = y->color;
+
+  if (p->left == t->nil) // 삭제하려는 노드의 왼쪽 자식이 nil일 때
+  {
+    x = p->right;
+    rbtree_transplant(t, p, p->right); // 삭제하려는 노드의 오른쪽 자식을 본인 자리로 올려줌
+  }
+  else if (p->right == t->nil) // 삭제하려는 노드가의 오른쪽 자식이 nil일 때
+  {
+    x = p->left;
+    rbtree_transplant(t, p, p->left); // 삭제하려는 노드의 왼쪽 자식을 본인 자리로 올려줌
+  }
+  else // 삭제하려는 노드의 자식이 두 개 일 때,
+  {
+  }
 }
 
 void inorder(node_t *root, node_t *nil, key_t *arr, int *index) // 크기순으로 배열에 담기 위한 중위순회 재귀함수
