@@ -68,6 +68,31 @@ void left_rotate(rbtree *t, node_t *x)
   x->parent = y;
 }
 
+void right_rotate(rbtree *t, node_t *x)
+{
+  node_t *y = x->left; // y는 회전 후 x의 부모가 될 노드
+  x->left = y->right;  // y의 오른쪽 서브트리를 x의 왼쪽 서브트리로 이동
+  if (y->right != t->nil)
+  {
+    y->right->parent = x;
+  }
+  y->parent = x->parent; // x와 y의 부모를 연결
+  if (x->parent == t->nil)
+  {
+    t->root = y;
+  }
+  else if (x == x->parent->left)
+  {
+    x->parent->left = y;
+  }
+  else
+  {
+    x->parent->right = y;
+  }
+  y->right = x; // x를 y의 오른쪽으로 이동
+  x->parent = y;
+}
+
 node_t *rbtree_insert(rbtree *t, const key_t key)
 {
   // TODO: implement insert
