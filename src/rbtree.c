@@ -253,6 +253,15 @@ void rbtree_transplant(rbtree *t, node_t *u, node_t *v) // 후임자(successor)�
   v->parent = u->parent;
 }
 
+node_t *rbtree_minimum(rbtree *t, node_t *x) // 주어진 node x의 오른쪽 자식 트리에서의 가장 최소값(successor)을 찾는 함수
+{
+  while (x->left != t->nil)
+  {
+    x = x->left;
+  }
+  return x;
+}
+
 // 삭제하려는 노드의 유효한 (nil 노드가 아닌) 자식의 개수가 1개 이하인지 2개인지 판별
 // 한 개 이하 라면 그 하나의 자식으로 transplant
 // 두 개 라면 successor를 찾아서 그 값으로 transplant
