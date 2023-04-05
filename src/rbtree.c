@@ -238,6 +238,19 @@ node_t *rbtree_max(const rbtree *t)
 
 void rbtree_transplant(rbtree *t, node_t *u, node_t *v) // 후임자(successor)를 삭제한 노드 자리에 넣어주는 함수
 {
+  if (u->parent == t->nil) // 삭제하려고 하는 노드 u가 루트일 경우
+  {
+    t->root = v;
+  }
+  else if (u == u->parent->left)
+  {
+    u->parent->left = v;
+  }
+  else
+  {
+    u->parent->right = v;
+  }
+  v->parent = u->parent;
 }
 
 // 삭제하려는 노드의 유효한 (nil 노드가 아닌) 자식의 개수가 1개 이하인지 2개인지 판별
