@@ -192,7 +192,26 @@ node_t *rbtree_insert(rbtree *t, const key_t key)
 node_t *rbtree_find(const rbtree *t, const key_t key)
 {
   // TODO: implement find
-  return t->root;
+  node_t *x = t->root; // 트리의 root부터 탐색해 나감
+
+  while (x != t->nil) // 포인터가 nil을 가리키면 해당 값이 트리에 없다는 것이므로 반복문 종료
+  {
+
+    if (key < x->key)
+    {
+      x = x->left;
+    }
+    else if (key > x->key)
+    {
+      x = x->right;
+    }
+    else if (key == x->key)
+    {
+      return x; // 값을 찾아내면 해당 노드를 가리키는 포인터를 리턴
+    }
+  }
+
+  return NULL; // 값이 없다면 NULL 리턴
 }
 
 node_t *rbtree_min(const rbtree *t)
