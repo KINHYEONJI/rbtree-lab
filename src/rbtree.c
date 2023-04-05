@@ -381,6 +381,9 @@ int rbtree_erase(rbtree *t, node_t *p)
   {
     rbtree_erase_fixup(t, x);
   }
+
+  free(p);
+
   return 0;
 }
 
