@@ -217,7 +217,12 @@ node_t *rbtree_find(const rbtree *t, const key_t key)
 node_t *rbtree_min(const rbtree *t)
 {
   // TODO: implement find
-  return t->root;
+  node_t *x = t->root;
+  while (x->left != t->nil) // 왼쪽 자식이 없을 때까지 왼쪽을 찾아 들어감
+  {
+    x = x->left;
+  }
+  return x;
 }
 
 node_t *rbtree_max(const rbtree *t)
