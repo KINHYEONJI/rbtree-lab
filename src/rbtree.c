@@ -242,8 +242,16 @@ int rbtree_erase(rbtree *t, node_t *p)
   return 0;
 }
 
-void inorder(node_t *root, node_t *nil, key_t *arr, int *index)
+void inorder(node_t *root, node_t *nil, key_t *arr, int *index) // 크기순으로 배열에 담기 위한 중위순회 재귀함수
 {
+  if (root == nil)
+  {
+    return;
+  }
+
+  inorder(root->left, nil, arr, index);
+  arr[(*index)++] = root->key; // 중위 순회는 가운데에서 arr에 저장
+  inorder(root->right, nil, arr, index);
 }
 
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n)
