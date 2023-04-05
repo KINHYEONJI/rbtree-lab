@@ -228,7 +228,12 @@ node_t *rbtree_min(const rbtree *t)
 node_t *rbtree_max(const rbtree *t)
 {
   // TODO: implement find
-  return t->root;
+  node_t *x = t->root; // 오른쪽 자식이 없을 때까지 오른쪽을 찾아 들어감
+  while (x->right != t->nil)
+  {
+    x = x->right;
+  }
+  return x;
 }
 
 int rbtree_erase(rbtree *t, node_t *p)
