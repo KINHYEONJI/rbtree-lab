@@ -1,7 +1,34 @@
-# Red-Black Tree 구현
+# 💻 C언어로 `Red-Black Tree`를 직접 구현하는 프로젝트 입니다. 🎄
 
-Balanced search tree로 많이 쓰이는 Red-black tree (이하 RB tree)를 C 언어로 구현하는 과제입니다.
-구현하는 추상 자료형 (ADT: abstract data type)은 ordered set, multiset 입니다.
+## 직접 정리한 블로그 link
+[@hyeon_zip/C언어-RB-TREE-구현하기](https://velog.io/@hyeon_zip/C%EC%96%B8%EC%96%B4-RB-TREE-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+***
+
+## 세팅방법
+```
+# ubuntu 환경
+sudo apt update
+sudo apt install build-essential
+sudo apt install gdb
+sudo apt-get install gcc-multilib g++-multilib
+
+git clone https://github.com/KINHYEONJI/rbtree-lab.git
+```
+
+***
+
+## 실행방법
+```
+make
+```
+
+***
+## TEST 결과
+![image](https://user-images.githubusercontent.com/88700047/231372555-c9dde69d-dbb4-4341-ad4d-132e60130ad4.png)
+
+
+***
+# 추가 과제 설명
 
 ## 구현 범위
 다음 기능들을 수행할 수 있도록 RB tree를 구현합니다.
@@ -36,9 +63,3 @@ Balanced search tree로 많이 쓰이는 Red-black tree (이하 RB tree)를 C �
 - C 언어, 특히 포인터(pointer)와 malloc, free 등의 system call에 익숙해짐.
 - 동적 메모리 할당(dynamic memory allocation)을 직접 사용해 봄으로써 동적 메모리 할당의 필요성 체감 및 data segment에 대한 이해도 상승
 - 고급 언어에서 기본으로 제공되는 자료구조가 세부적으로는 어떻게 구현되어 있는지 경험함으로써 고급 언어 사용시에도 효율성 고려
-
-## 참고문헌
-- [위키백과: 레드-블랙 트리](https://ko.wikipedia.org/wiki/%EB%A0%88%EB%93%9C-%EB%B8%94%EB%9E%99_%ED%8A%B8%EB%A6%AC)
-([영어](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree))
-- CLRS book (Introduction to Algorithms) 13장 레드 블랙 트리 - Sentinel node를 사용한 구현
-- [Wikipedia:균형 이진 트리의 구현 방법들](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree#Implementations)
