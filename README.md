@@ -1,12 +1,13 @@
 # 💻 C언어로 `RB Tree`를 직접 구현하는 프로젝트 입니다.🎄
 
+<br>
+
+### 직접 정리한 블로그 link
+[@hyeon_zip/C언어-RB-TREE-구현하기](https://velog.io/@hyeon_zip/C%EC%96%B8%EC%96%B4-RB-TREE-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+
 ---
 
-## 직접 정리한 블로그 link
-[@hyeon_zip/C언어-RB-TREE-구현하기](https://velog.io/@hyeon_zip/C%EC%96%B8%EC%96%B4-RB-TREE-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
-***
-
-## 세팅방법
+### 세팅방법
 ```
 # ubuntu 환경
 sudo apt update
@@ -17,22 +18,24 @@ sudo apt-get install gcc-multilib g++-multilib
 git clone https://github.com/KINHYEONJI/rbtree-lab.git
 ```
 
-***
+---
 
-## 실행방법
+### 실행방법
 ```
 make
 ```
 
-***
-## TEST 결과
+---
+
+### TEST 결과
 ![image](https://user-images.githubusercontent.com/88700047/231372555-c9dde69d-dbb4-4341-ad4d-132e60130ad4.png)
 
 
-***
+---
+
 # 추가 과제 설명
 
-## 구현 범위
+### 구현 범위
 다음 기능들을 수행할 수 있도록 RB tree를 구현합니다.
 
 - tree = `new_tree()`: RB tree 구조체 생성
@@ -54,12 +57,12 @@ make
   - array의 크기는 n으로 주어지며 tree의 크기가 n 보다 큰 경우에는 순서대로 n개 까지만 변환
   - array의 메모리 공간은 이 함수를 부르는 쪽에서 준비하고 그 크기를 n으로 알려줍니다.
 
-## 구현 규칙
+### 구현 규칙
 - `src/rbtree.c` 이외에는 수정하지 않고 test를 통과해야 합니다.
 - `make test`를 수행하여 `Passed All tests!`라는 메시지가 나오면 모든 test를 통과한 것입니다.
 - Sentinel node를 사용하여 구현했다면 `test/Makefile`에서 `CFLAGS` 변수에 `-DSENTINEL`이 추가되도록 comment를 제거해 줍니다.
 
-## 과제의 의도 (Motivation)
+### 과제의 의도 (Motivation)
 
 - 복잡한 자료구조(data structure)를 구현해 봄으로써 자신감 상승
 - C 언어, 특히 포인터(pointer)와 malloc, free 등의 system call에 익숙해짐.
