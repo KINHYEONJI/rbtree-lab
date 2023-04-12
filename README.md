@@ -1,4 +1,6 @@
-# 💻 C언어로 `Red-Black Tree`를 직접 구현하는 프로젝트 입니다. 🎄
+# 💻 C언어로 `RB Tree`를 직접 구현하는 프로젝트 입니다.🎄
+
+---
 
 ## 직접 정리한 블로그 link
 [@hyeon_zip/C언어-RB-TREE-구현하기](https://velog.io/@hyeon_zip/C%EC%96%B8%EC%96%B4-RB-TREE-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
